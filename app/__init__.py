@@ -4,7 +4,7 @@ import flask
 app = flask.Flask(__name__)
 
 
-
+import os
 from app import categories
 
 
@@ -15,4 +15,6 @@ def main():
 
 @app.route("/maps")
 def maps():
-  return flask.redirect(flask.url_for("main"))
+  image_names = ["base_map.png", "beach_map.png"]
+  images = (os.path.join("/static/images", name) for name in image_names)
+  return flask.render_template("maps.html", images=images)
