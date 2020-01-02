@@ -48,26 +48,18 @@
 	<![endif]-->
 
 	</head>
-	<body>
+	<body style="background-color:#fff5e6;">
 
-	<div class="colorlib-loader"></div>
-
-	<div id="page">
-
-
-<!--<section id="home" class="video-hero" style="height: 500px; background-image: url(images/cover_img_1.jpg);  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">-->
-
-<center><h1 style="margin-top: 80px; margin-bottom: 0px;">Home</h1></center>
-
+<center><h1 style="margin-top: 80px; margin-bottom: 0px;"><font color="DarkRed">Home</font></h1></center>
 
 <div class="colorlib-blog">
 			<div class="container">
 				<div class="row">
-          {% for _ in range(8) %}
+          {% for category in categories %}
 					<div class="col-md-4 animate-box">
-						<article>
-              <center><h3> Map </h3></center>
-              <img src="/static/images/map.jpg" width="300" height="300">
+						<article style="background-color:rgba(0,0,0,0);">
+              <center><h3><a href={{ category.url }} style="color:DarkRed"> {{ category.name }} </a></h3></center>
+              <a href={{ category.url }}><img src= {{ category.photo }} width="300" height="300"></a>
 						</article>
 					</div>
           {% endfor %}
