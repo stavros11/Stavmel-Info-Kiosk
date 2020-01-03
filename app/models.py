@@ -28,4 +28,16 @@ class Beaches(db.Model):
 
   @property
   def distance(self) -> float:
+    if self.latitude is None or self.longitude is None:
+      return None
     return spherical_earth_projected_distance(self.latitude, self.longitude)
+
+  @property
+  def rounded_distance(self) -> int:
+    d = self.distance
+    if d is None:
+      return d
+    return int(round(self.distance))
+
+  def background_image(self) -> str:
+    return "background-image: url({});".format(self.photo_url)
