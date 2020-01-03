@@ -17,6 +17,6 @@ class Category:
 
 all = [Category("Transportation", "maps", "transportation.png"),
        Category("Maps", "maps", "map.jpg"),
-       Category("Places of Interest", "maps", "poi.png"),
+       Category("Places of Interest", "places", "poi.png"),
        Category("Weather", "maps", "weather.png"),
        Category("Useful phones", "maps", "phone.png")]
