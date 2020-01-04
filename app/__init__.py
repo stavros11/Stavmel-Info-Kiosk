@@ -22,9 +22,10 @@ from app import categories
 from app import models
 
 
-@app.route('/', methods=["GET", "POST"])
+@app.route('/')
 def main():
-  return flask.render_template("home.html", categories=categories.all)
+  return flask.render_template("home.html", categories=categories.main,
+                               show_home_button=False)
 
 
 @app.route("/maps")
@@ -36,7 +37,19 @@ def maps():
 
 @app.route("/places")
 def places():
-  beaches = (models.Beach.query.
-            filter(models.Beach.road_distance != None).
-            order_by(models.Beach.road_distance))
-  return flask.render_template("beaches.html", places=beaches)
+  return flask.render_template("home.html", categories=categories.places,
+                               show_home_button=True)
+
+
+@app.route("/places/<place_type>")
+def places_list(place_type: str):
+  model = getattr(models, place_type)
+  data = (model.query.filter(model.road_distance != None).
+          order_by(model.road_distance))
+  return flask.render_template("places.html", places=data)
+
+
+@app.route("/weather")
+def weather():
+  # TODO: Put the correct link here
+  return flask.redirect(flask.url_for("main"))

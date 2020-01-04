@@ -54,6 +54,12 @@
   <div class="overlay"></div>
   </section>
 
+  {% if show_home_button %}
+  <center>
+  <a href={{ url_for("main") }}><i class="icon-home" style="font-size:4em; color:DarkRed;"></i></a>
+  </center>
+  {% endif %}
+
 <div class="colorlib-blog">
 			<div class="container">
 				<div class="row">

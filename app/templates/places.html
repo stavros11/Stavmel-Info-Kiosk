@@ -55,6 +55,8 @@
 </section>
 
 <center>
+<a href={{ url_for("places") }}><i class="icon-arrow-left2" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
+&emsp; &emsp; &emsp;
 <a href={{ url_for("main") }}><i class="icon-home" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
 </center>
 
@@ -80,9 +82,13 @@
                           </h4>
                           <p><font color=DarkRed>{{ place.description }}</font></p>
                         </td>
+                        {% if place.has_photo %}
                         <td><img src= {{ place.photo_url }} height=350 width=520></td>
+                        {% endif %}
                       {% else %}
+                        {% if place.has_photo %}
                         <td style="padding: 0 50px 0 0;"><img src= {{ place.photo_url }} height=350 width=520></td>
+                        {% endif %}
                         <td>
                           <h2><font color=DarkRed>{{ place.name }}</font></h2>
                           <h4>

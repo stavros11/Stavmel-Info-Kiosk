@@ -15,8 +15,21 @@ class Category:
     return flask.url_for(self.url_name)
 
 
-all = [Category("Transportation", "maps", "transportation.png"),
-       Category("Maps", "maps", "map.jpg"),
-       Category("Places of Interest", "places", "poi.png"),
-       Category("Weather", "maps", "weather.png"),
-       Category("Useful phones", "maps", "phone.png")]
+main = [Category("Transportation", "maps", "transportation.png"),
+        Category("Maps", "maps", "map.jpg"),
+        Category("Places of Interest", "places", "poi.png"),
+        Category("Weather", "weather", "weather.png"),
+        Category("Useful phones", "maps", "phone.png")]
+
+
+class PlaceCategory(Category):
+
+  @property
+  def url(self):
+    return flask.url_for("places_list", place_type=self.url_name)
+
+
+places = [PlaceCategory("Beaches", "Beach", "beaches.jpg"),
+          PlaceCategory("Monuments", "Monument", "monuments.jpg"),
+          PlaceCategory("Museums", "Museum", "museum.jpg"),
+          PlaceCategory("Areas of Natural Beauty", "Natural", "natural.jpg")]

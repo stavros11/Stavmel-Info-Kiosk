@@ -42,6 +42,10 @@ class BasePlace:
       return d
     return int(round(self.geo_distance))
 
+  @property
+  def has_photo(self) -> bool:
+    return hasattr(self, "photo_url")
+
 
 class BaseSight(BasePlace):
   opening_hours = db.Column(db.String(128))
