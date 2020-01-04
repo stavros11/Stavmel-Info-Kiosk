@@ -14,11 +14,14 @@ def spherical_earth_projected_distance(latitude: float,
   return radius * np.sqrt(d2)
 
 
-class Beaches(db.Model):
+class BasePlace:
   name = db.Column(db.String(128), primary_key=True)
   photo_url = db.Column(db.String(512))
-  google_maps = db.Column(db.String(1024))
   description = db.Column(db.String(50000))
+  google_maps = db.Column(db.String(1024))
+  directions_url = db.Column(db.String(4096))
+  road_distance = db.Column(db.Float())
+  road_time = db.Column(db.Float())
   latitude = db.Column(db.Float())
   longitude = db.Column(db.Float())
 
@@ -27,17 +30,27 @@ class Beaches(db.Model):
     return "".join(word.lower() for word in self.name.split(" "))
 
   @property
-  def distance(self) -> float:
+  def geo_distance(self) -> float:
     if self.latitude is None or self.longitude is None:
       return None
     return spherical_earth_projected_distance(self.latitude, self.longitude)
 
   @property
-  def rounded_distance(self) -> int:
-    d = self.distance
+  def rounded_geo_distance(self) -> int:
+    d = self.geo_distance
     if d is None:
       return d
-    return int(round(self.distance))
+    return int(round(self.geo_distance))
 
-  def background_image(self) -> str:
-    return "background-image: url({});".format(self.photo_url)
+
+class BaseSight(BasePlace):
+  opening_hours = db.Column(db.String(128))
+  telephone = db.Column(db.String(128))
+  address = db.Column(db.String(128))
+  price = db.Column(db.String(128))
+
+
+class Beach(db.Model, BasePlace): pass
+class Museum(db.Model, BaseSight): pass
+class Monument(db.Model, BaseSight): pass
+class Natural(db.Model, BaseSight): pass

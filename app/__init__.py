@@ -36,4 +36,7 @@ def maps():
 
 @app.route("/places")
 def places():
-  return flask.render_template("places.html", places=models.Beaches.query.all())
+  beaches = (models.Beach.query.
+            filter(models.Beach.road_distance != None).
+            order_by(models.Beach.road_distance))
+  return flask.render_template("beaches.html", places=beaches)

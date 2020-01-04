@@ -55,7 +55,7 @@
 </section>
 
 <center>
-<a href={{ url_for("main") }}><i class="icon-home" style="padding-top:100px; font-size:6em; color:DarkRed;"></i></a>
+<a href={{ url_for("main") }}><i class="icon-home" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
 </center>
 
 <div class="colorlib-work">
@@ -73,8 +73,10 @@
                         <td style="padding: 0 50px 0 0;">
                           <h2><font color=DarkRed>{{ place.name }}</font></h2>
                           <h4>
-                            <font color=DarkRed>Distance: {{ place.rounded_distance }} km</font>
-                            <a href= {{ place.google_maps }}><img src="https://webstockreview.net/images/map-clipart-google-map-14.png" width="100"></a>
+                            {% if place.road_distance is not none %}
+                            <font color=DarkRed>Distance: {{ place.road_distance }} km ({{ place.road_time | int }} min.)</font>
+                            <a href= {{ place.directions_url }}><img src="https://webstockreview.net/images/map-clipart-google-map-14.png" width="100"></a>
+                            {% endif %}
                           </h4>
                           <p><font color=DarkRed>{{ place.description }}</font></p>
                         </td>
@@ -84,8 +86,10 @@
                         <td>
                           <h2><font color=DarkRed>{{ place.name }}</font></h2>
                           <h4>
-                            <font color=DarkRed>Distance: {{ place.rounded_distance }} km</font>
-                            <a href= {{ place.google_maps }}><img src="https://webstockreview.net/images/map-clipart-google-map-14.png" width="100"></a>
+                            {% if place.road_distance is not none %}
+                            <font color=DarkRed>Distance: {{ place.road_distance }} km ({{ place.road_time | int }} min.)</font>
+                            <a href= {{ place.directions_url }}><img src="https://webstockreview.net/images/map-clipart-google-map-14.png" width="100"></a>
+                            {% endif %}
                           </h4>
                           <p><font color=DarkRed>{{ place.description }}</font></p>
                         </td>
