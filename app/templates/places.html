@@ -65,7 +65,7 @@
     {% for place in places %}
     <div class="col-md-12">
       <div class="work-flex">
-        <div class="animate-box" style="height: 450px;">
+        <div class="animate-box" style="height: {{ place.horizontal_margin }};">
           <div class="row no-gutters" style="width:1500px;">
             <div class="col-md-12 no-gutters">
                   <article style="background-color:rgba(0,0,0,0);">
@@ -83,11 +83,11 @@
                           <p><font color=DarkRed>{{ place.description }}</font></p>
                         </td>
                         {% if place.has_photo %}
-                        <td><img src= {{ place.photo_url }} height=350 width=520></td>
+                        <td><img src= {{ place.photo_url }} height={{ place.photo_height }} width={{ place.photo_width }}></td>
                         {% endif %}
                       {% else %}
                         {% if place.has_photo %}
-                        <td style="padding: 0 50px 0 0;"><img src= {{ place.photo_url }} height=350 width=520></td>
+                        <td style="padding: 0 50px 0 0;"><img src= {{ place.photo_url }} height={{ place.photo_height }} width={{ place.photo_width }}></td>
                         {% endif %}
                         <td>
                           <h2><font color=DarkRed>{{ place.name }}</font></h2>

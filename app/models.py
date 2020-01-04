@@ -25,6 +25,11 @@ class BasePlace:
   latitude = db.Column(db.Float())
   longitude = db.Column(db.Float())
 
+  # TODO: Fix automatic photo rescaling using the photo size
+  photo_rescale_factor = 0.3
+  photo_height = 350
+  photo_width = 520
+
   @property
   def id(self) -> str:
     return "".join(word.lower() for word in self.name.split(" "))
@@ -54,7 +59,21 @@ class BaseSight(BasePlace):
   price = db.Column(db.String(128))
 
 
-class Beach(db.Model, BasePlace): pass
-class Museum(db.Model, BaseSight): pass
-class Monument(db.Model, BaseSight): pass
-class Natural(db.Model, BaseSight): pass
+class Beach(db.Model, BasePlace):
+  horizontal_margin = '450px'
+
+
+class Museum(db.Model, BaseSight):
+  horizontal_margin = '450px'
+
+
+class Monument(db.Model, BaseSight):
+  horizontal_margin = '700px'
+  photo_height = 200
+  photo_width = 340
+
+
+class Natural(db.Model, BaseSight):
+  photo_height = 280
+  photo_width = 400
+  horizontal_margin = '450px'
