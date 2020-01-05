@@ -18,13 +18,18 @@ migrate = flask_migrate.Migrate(app, db)
 
 
 import os
-from app import categories
 from app import models
 
 
 @app.route('/')
 def main():
-  return flask.render_template("home.html", categories=categories.main,
+  weather_url = "https://weather.com/weather/today/l/f0de8849c0ac9f287c8d68536eb02828142419816360f365c396c7c9782f6819"
+  cats = [models.Category("Transportation", "maps", "transportation.png"),
+          models.Category("Maps", "maps", "map.jpg"),
+          models.Category("Places of Interest", "places", "poi.png"),
+          models.CategoryURL("Weather", weather_url, "weather.png", new_tab=True),
+          models.Category("Useful phones", "phones", "phone.png")]
+  return flask.render_template("home.html", categories=cats,
                                show_home_button=False)
 
 
@@ -37,7 +42,13 @@ def maps():
 
 @app.route("/places")
 def places():
-  return flask.render_template("home.html", categories=categories.places,
+  water_park_url = "https://www.water-park.gr/"
+  cats = [models.PlaceCategory("Beaches", "Beach", "beaches.jpg"),
+          models.PlaceCategory("Monuments", "Monument", "monuments.jpg"),
+          models.PlaceCategory("Museums", "Museum", "museum.jpg"),
+          models.PlaceCategory("Areas of Natural Beauty", "Natural", "natural.jpg"),
+          models.CategoryURL("Water Park", water_park_url, "waterpark.png", new_tab=True)]
+  return flask.render_template("home.html", categories=cats,
                                show_home_button=True)
 
 

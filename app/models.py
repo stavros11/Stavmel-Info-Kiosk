@@ -1,5 +1,35 @@
+import os
+import flask
 import numpy as np
 from app import db
+
+
+class Category:
+  """Objects that appear in the home page."""
+
+  def __init__(self, name: str, url: str, photo: str, new_tab: bool = False):
+    self.name = name
+    self._url = url
+    self.photo = os.path.join("/static/images", photo)
+    self.new_tab = new_tab
+
+  @property
+  def url(self):
+    return flask.url_for(self._url)
+
+
+class CategoryURL(Category):
+
+  @property
+  def url(self):
+    return self._url
+
+
+class PlaceCategory(Category):
+
+  @property
+  def url(self):
+    return flask.url_for("places_list", place_type=self._url)
 
 
 def spherical_earth_projected_distance(latitude: float,
