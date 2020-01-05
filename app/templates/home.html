@@ -66,8 +66,13 @@
           {% for category in categories %}
 					<div class="col-md-4 animate-box">
 						<article style="background-color:rgba(0,0,0,0);">
+              {% if category.new_tab %}
+              <center><h3><a href={{ category.url }} target="blank" style="color:DarkRed"> {{ category.name }} </a></h3></center>
+              <a href={{ category.url }} target="blank"><img src= {{ category.photo }} width="300" height="300"></a>
+              {% else %}
               <center><h3><a href={{ category.url }} style="color:DarkRed"> {{ category.name }} </a></h3></center>
               <a href={{ category.url }}><img src= {{ category.photo }} width="300" height="300"></a>
+              {% endif %}
 						</article>
 					</div>
           {% endfor %}

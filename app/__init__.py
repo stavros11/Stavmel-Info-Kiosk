@@ -8,7 +8,7 @@ app = flask.Flask(__name__)
 # Storage directory
 app.config["STORAGE_PATH"] = "/home/stavros/DATA/InfoKiosk"
 # Configure SQL SQLAlchemy
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///{}/places.db".format(
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///{}/data.db".format(
     app.config["STORAGE_PATH"])
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 # Define database
@@ -47,9 +47,3 @@ def places_list(place_type: str):
   data = (model.query.filter(model.road_distance != None).
           order_by(model.road_distance))
   return flask.render_template("places.html", places=data)
-
-
-@app.route("/weather")
-def weather():
-  # TODO: Put the correct link here
-  return flask.redirect(flask.url_for("main"))
