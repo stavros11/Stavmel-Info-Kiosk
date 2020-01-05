@@ -46,17 +46,25 @@ def spherical_earth_projected_distance(latitude: float,
 
 class BasePlace:
   name = db.Column(db.String(128), primary_key=True)
+  opening_hours = db.Column(db.String(128))
+  telephone = db.Column(db.String(128))
+  fax = db.Column(db.String(128))
+  email = db.Column(db.String(128))
+  website = db.Column(db.String(128))
+  contact = db.Column(db.String(128))
+  address = db.Column(db.String(128))
+  price = db.Column(db.String(128))
   photo_url = db.Column(db.String(512))
   description = db.Column(db.String(50000))
   google_maps = db.Column(db.String(1024))
+  latitude = db.Column(db.Float())
+  longitude = db.Column(db.Float())
   directions_url = db.Column(db.String(4096))
   road_distance = db.Column(db.Float())
   road_time = db.Column(db.Float())
-  latitude = db.Column(db.Float())
-  longitude = db.Column(db.Float())
 
-  # TODO: Fix automatic photo rescaling using the photo size
-  photo_rescale_factor = 0.3
+  # TODO: (OPTIONAL) Fix automatic photo rescaling using the photo size
+  #photo_rescale_factor = 0.3
   photo_height = 350
   photo_width = 520
 
@@ -82,31 +90,19 @@ class BasePlace:
     return self.photo_url is not None
 
 
-class BaseSight(BasePlace):
-  opening_hours = db.Column(db.String(128))
-  telephone = db.Column(db.String(128))
-  address = db.Column(db.String(128))
-  price = db.Column(db.String(128))
+class Beach(db.Model, BasePlace): pass
+class Museum(db.Model, BasePlace): pass
+class Hospital(db.Model, BasePlace): pass
 
 
-class Beach(db.Model, BasePlace):
-  horizontal_margin = '450px'
-
-
-class Museum(db.Model, BaseSight):
-  horizontal_margin = '450px'
-
-
-class Monument(db.Model, BaseSight):
-  horizontal_margin = '700px'
+class Monument(db.Model, BasePlace):
   photo_height = 200
   photo_width = 340
 
 
-class Natural(db.Model, BaseSight):
+class Natural(db.Model, BasePlace):
   photo_height = 280
   photo_width = 400
-  horizontal_margin = '450px'
 
 
 class Phone(db.Model):

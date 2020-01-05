@@ -24,13 +24,19 @@ from app import models
 @app.route('/')
 def main():
   weather_url = "https://weather.com/weather/today/l/f0de8849c0ac9f287c8d68536eb02828142419816360f365c396c7c9782f6819"
-  cats = [models.Category("Transportation", "maps", "transportation.png"),
+  cats = [models.Category("Transportation", "transportation", "transportation.png"),
           models.Category("Maps", "maps", "map.jpg"),
           models.Category("Places of Interest", "places", "poi.png"),
           models.CategoryURL("Weather", weather_url, "weather.png", new_tab=True),
+          models.Category("Emergency", "emergency", "hospital.png"),
           models.Category("Useful phones", "phones", "phone.png")]
   return flask.render_template("home.html", categories=cats,
                                show_home_button=False)
+
+
+@app.route("/transportation")
+def transportation():
+  return flask.redirect(flask.url_for("main"))
 
 
 @app.route("/maps")
@@ -58,6 +64,12 @@ def places_list(place_type: str):
   data = (model.query.filter(model.road_distance != None).
           order_by(model.road_distance))
   return flask.render_template("places.html", places=data)
+
+
+@app.route("/emergency")
+def emergency():
+  data = models.Hospital.query.all()
+  return flask.render_template("emergency.html", places=data)
 
 
 @app.route("/phones")

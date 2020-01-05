@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Home</title>
+	<title>Emergency</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
@@ -50,13 +50,8 @@
 	</head>
 	<body style="background-color:#fff5e6;">
 
-  <section id="home" style="height: 100px;">
-  <div class="overlay"></div>
-  </section>
-
+  <p></p>
   <center>
-  <a href={{ url_for("places") }}><i class="icon-arrow-left2" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
-  &emsp; &emsp; &emsp;
   <a href={{ url_for("main") }}><i class="icon-home" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
   </center>
 
@@ -67,18 +62,19 @@
   <a href= {{ place.directions_url }} target="blank"><img src="https://webstockreview.net/images/map-clipart-google-map-14.png" width="100"></a>
   {% endif %}
   <font color=DarkRed>
-  {% if place.description is not none %}<p>{{ place.description }}</p>{% endif %}
+  <p></p>
+  {% if place.opening_hours %}<p><b>Opening Hours:</b> {{ place.opening_hours }}</p>{% endif %}
+  {% if place.address %}<p><b>Address:</b> {{ place.address }}</p>{% endif %}
+  {% if place.telephone %}<p><b>Telephone:</b> {{ place.telephone }}</p>{% endif %}
+  {% if place.fax %}<p><b>Fax:</b> {{ place.fax }}</p>{% endif %}
+  {% if place.website %}<p><b>Website:</b> {{ place.website }}</p>{% endif %}
+  {% if place.email %}<p><b>Email:</b> {{ place.email }}</p>{% endif %}
+  {% if place.description %}<p>{{ place.description }}</p>{% endif %}
   </font>
 {% endmacro %}
 
 {% macro print_image(place) %}
-  <font color=DarkRed>
-  {% if place.opening_hours %}<p><b>Opening Hours:</b> {{ place.opening_hours }}</p>{% endif %}
-  {% if place.price %}<p><b>Entrance fee:</b> {{ place.price }}</p>{% endif %}
-  {% if place.address %}<p><b>Address:</b> {{ place.address }}</p>{% endif %}
-  {% if place.telephone %}<p><b>Telephone:</b> {{ place.telephone }}</p>{% endif %}
   {% if place.has_photo %}
-  </font>
   <img src= {{ place.photo_url }} height={{ place.photo_height }} width={{ place.photo_width }}>
   {% endif %}
 {% endmacro %}
@@ -86,6 +82,38 @@
 
 <div class="colorlib-blog">
 			<div class="container">
+        <div class="col-lg-12 animate-box">
+          <article style="background-color:rgba(0,0,0,0);">
+            <center>
+            <font color=DarkRed size=5><b>Emergency Phone Numbers</b></font>
+            <p></p>
+            <font color=DarkRed size=4>
+              <table>
+                <tr>
+                  <td style="padding: 0px 100px 0 0;">
+                    <p><b>European Emergency Call Number</b>
+                      <br><font size=5>112</font></p>
+                  </td>
+                  <td>
+                    <p><b>Emergency / First Aid:</b>
+                      <br><font size=5>166</font></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 0px 100px 0 0;">
+                    <p><b>Emergency Fire Service:</b>
+                      <br><font size=5>199</font></p>
+                  </td>
+                  <td>
+                    <p><b>Police Emergency Service:</b>
+                      <br><font size=5>100</font></p>
+                  </td>
+                </tr>
+              </table>
+          </font></center>
+        </article>
+        </div>
+
           {% for place in places %}
 					<div class="col-lg-12 animate-box">
 						<article style="background-color:rgba(0,0,0,0);">

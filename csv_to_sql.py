@@ -27,7 +27,8 @@ required_columns = ['name',
 filenames = {"beaches": "beach",
              "monuments": "monument",
              "natural": "natural",
-             "museums": "museum"}
+             "museums": "museum",
+             "hospitals": "hospital"}
 
 
 # Define database file
