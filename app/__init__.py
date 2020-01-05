@@ -47,3 +47,13 @@ def places_list(place_type: str):
   data = (model.query.filter(model.road_distance != None).
           order_by(model.road_distance))
   return flask.render_template("places.html", places=data)
+
+
+@app.route("/phones")
+def phones():
+  model = models.Phones
+  types_list = ["emergency", "services", "hospitals", "tourism", "consulate"]
+  service_types = [(stype.capitalize(), model.query.filter(model.type == stype))
+                   for stype in types_list]
+
+  return flask.render_template("phones.html", service_types=service_types)

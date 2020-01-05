@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+
+  <!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400" rel="stylesheet">
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/animate.css') }}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/icomoon.css') }}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.css') }}">
+
+     <!-- Magnific Popup -->
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/magnific-popup.css') }}">
+
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/owl.carousel.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/owl.theme.default.min.css') }}">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+
+	<!-- Modernizr JS -->
+	<script src="{{ url_for('static',filename='js/modernizr-2.6.2.min.js') }}"></script>
+    <!-- FOR IE9 below -->
+	<![if lt IE 9]>
+	<script src="{{ url_for('static',filename='js/respond.min.js') }}"></script>
+	<![endif]-->
+
+	</head>
+	<body style="background-color:#fff5e6;">
+
+  <center>
+  <a href={{ url_for("main") }}><i class="icon-home" style="font-size:4em; color:DarkRed;"></i></a>
+  </center>
+
+  <p></p>
+
+  <section id="home" style="height: 10px;">
+  <center>
+  <h4><font color=DarkRed> Greece phone code: +30 </font></h4>
+  <h4><font color=DarkRed> Rhodes phone code: 22410 </font></h4>
+  </center>
+  </section>
+
+
+<div class="colorlib-blog">
+			<div class="container">
+          {% for service_type, services in service_types %}
+					<div class="col-md-14 animate-box">
+            <h2><font color=DarkRed> {{ service_type }} </font></h2>
+						<article style="background-color:rgba(0,0,0,0);">
+              <font color=DarkRed size=4>
+              <table>
+              {% for service in services %}
+                {% if loop.index % 2 == 1 %}<tr>{% endif %}
+                  <td style="padding: 20px 200px 0 0;">
+                    <b>{{ service.name }}</b> <br>
+                    {% if service.contact is not none %} Contact: {{ service.contact }} <br> {% endif %}
+                    {% if service.address is not none %} Address: {{ service.address }} <br> {% endif %}
+                    {% if service.telephone is not none %} Tel: {{ service.telephone }} <br> {% endif %}
+                    {% if service.fax is not none %} Fax: {{ service.fax }} <br> {% endif %}
+                    {% if service.email is not none %} Email: {{ service.email }} <br> {% endif %}
+                    {% if service.website is not none %} Website: {{ service.website }} <br> {% endif %}
+                  </td>
+                {% if loop.index % 2 == 0 %}</tr>{% endif %}
+              {% endfor %}
+              </table>
+						</font>
+          </article>
+					</div>
+          {% endfor %}
+			</div>
+
+			<div class="copy">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<p style="margin-top: 100px;">
+								 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --><br>
+								Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a>, <a href="http://pexels.com/" target="_blank">Pexels</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
+	</div>
+
+	<!-- jQuery -->
+	<script src="{{ url_for('static',filename='js/jquery.min.js') }}"></script>
+	<!-- jQuery Easing -->
+	<script src="{{ url_for('static',filename='js/jquery.easing.1.3.js') }}"></script>
+	<!-- Bootstrap -->
+	<script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+	<!-- Waypoints -->
+	<script src="{{ url_for('static',filename='js/jquery.waypoints.min.js') }}"></script>
+	<!-- Stellar Parallax -->
+	<script src="{{ url_for('static',filename='js/jquery.stellar.min.js') }}"></script>
+	<!-- YTPlayer -->
+	<script src="{{ url_for('static',filename='js/jquery.mb.YTPlayer.min.js') }}"></script>
+	<!-- Owl carousel -->
+	<script src="{{ url_for('static',filename='js/owl.carousel.min.js') }}"></script>
+	<!-- Magnific Popup -->
+	<script src="{{ url_for('static',filename='js/jquery.magnific-popup.min.js') }}"></script>
+	<script src="{{ url_for('static',filename='js/magnific-popup-options.js') }}"></script>
+	<!-- Counters -->
+	<script src="{{ url_for('static',filename='js/jquery.countTo.js') }}"></script>
+	<!-- Main -->
+	<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+
+	</body>
+</html>

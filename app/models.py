@@ -77,3 +77,15 @@ class Natural(db.Model, BaseSight):
   photo_height = 280
   photo_width = 400
   horizontal_margin = '450px'
+
+
+class Phones(db.Model):
+  name = db.Column(db.String(128), primary_key=True)
+  telephone = db.Column(db.String(128))
+  fax = db.Column(db.String(128))
+  email = db.Column(db.String(128))
+  website = db.Column(db.String(128))
+  address = db.Column(db.String(256))
+  contact = db.Column(db.String(128))
+  hours = db.Column(db.String(128))
+  type = db.Column(db.String(128))
