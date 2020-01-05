@@ -67,7 +67,7 @@
   {% if place.address %}<p><b>Address:</b> {{ place.address }}</p>{% endif %}
   {% if place.telephone %}<p><b>Telephone:</b> {{ place.telephone }}</p>{% endif %}
   {% if place.fax %}<p><b>Fax:</b> {{ place.fax }}</p>{% endif %}
-  {% if place.website %}<p><b>Website:</b> {{ place.website }}</p>{% endif %}
+  {% if place.website %}<p><b>Website:</b> {{ place.website | safe }}</p>{% endif %}
   {% if place.email %}<p><b>Email:</b> {{ place.email }}</p>{% endif %}
   {% if place.description %}<p>{{ place.description }}</p>{% endif %}
   </font>

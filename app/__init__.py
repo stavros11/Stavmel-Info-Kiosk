@@ -53,7 +53,8 @@ def places():
           models.PlaceCategory("Monuments", "Monument", "monuments.jpg"),
           models.PlaceCategory("Museums", "Museum", "museum.jpg"),
           models.PlaceCategory("Areas of Natural Beauty", "Natural", "natural.jpg"),
-          models.CategoryURL("Water Park", water_park_url, "waterpark.png", new_tab=True)]
+          models.CategoryURL("Water Park", water_park_url, "waterpark.png", new_tab=True),
+          models.PlaceCategory("Tourist Information Offices", "Info", "info.png")]
   return flask.render_template("home.html", categories=cats,
                                show_home_button=True)
 

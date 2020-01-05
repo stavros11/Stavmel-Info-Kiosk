@@ -77,6 +77,9 @@
   {% if place.price %}<p><b>Entrance fee:</b> {{ place.price }}</p>{% endif %}
   {% if place.address %}<p><b>Address:</b> {{ place.address }}</p>{% endif %}
   {% if place.telephone %}<p><b>Telephone:</b> {{ place.telephone }}</p>{% endif %}
+  {% if place.fax %}<p><b>Fax:</b> {{ place.fax }}</p>{% endif %}
+  {% if place.website %}<p><b>Website:</b> {{ place.website | safe }}</p>{% endif %}
+  {% if place.email %}<p><b>Email:</b> {{ place.email }}</p>{% endif %}
   {% if place.has_photo %}
   </font>
   <img src= {{ place.photo_url }} height={{ place.photo_height }} width={{ place.photo_width }}>

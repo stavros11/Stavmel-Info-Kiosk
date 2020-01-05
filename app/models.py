@@ -93,6 +93,7 @@ class BasePlace:
 class Beach(db.Model, BasePlace): pass
 class Museum(db.Model, BasePlace): pass
 class Hospital(db.Model, BasePlace): pass
+class Info(db.Model, BasePlace): pass
 
 
 class Monument(db.Model, BasePlace):
