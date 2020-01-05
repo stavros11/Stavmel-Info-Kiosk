@@ -62,7 +62,7 @@ def places_list(place_type: str):
 
 @app.route("/phones")
 def phones():
-  model = models.Phones
+  model = models.Phone
   types_list = ["emergency", "services", "hospitals", "tourism", "consulate"]
   service_types = [(stype.capitalize(), model.query.filter(model.type == stype))
                    for stype in types_list]

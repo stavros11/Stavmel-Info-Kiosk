@@ -109,7 +109,7 @@ class Natural(db.Model, BaseSight):
   horizontal_margin = '450px'
 
 
-class Phones(db.Model):
+class Phone(db.Model):
   name = db.Column(db.String(128), primary_key=True)
   telephone = db.Column(db.String(128))
   fax = db.Column(db.String(128))
