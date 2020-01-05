@@ -66,11 +66,19 @@
   <font color=DarkRed size=4><b>Distance: {{ place.road_distance }} km ({{ place.road_time | int }} min.)</b></font>
   <a href= {{ place.directions_url }}><img src="https://webstockreview.net/images/map-clipart-google-map-14.png" width="100"></a>
   {% endif %}
-  <p><font color=DarkRed>{{ place.description }}</font></p>
+  <font color=DarkRed>
+  {% if place.description is not none %}<p>{{ place.description }}</p>{% endif %}
+  </font>
 {% endmacro %}
 
 {% macro print_image(place) %}
+  <font color=DarkRed>
+  {% if place.opening_hours %}<p><b>Opening Hours:</b> {{ place.opening_hours }}</p>{% endif %}
+  {% if place.price %}<p><b>Entrance fee:</b> {{ place.price }}</p>{% endif %}
+  {% if place.address %}<p><b>Address:</b> {{ place.address }}</p>{% endif %}
+  {% if place.telephone %}<p><b>Telephone:</b> {{ place.telephone }}</p>{% endif %}
   {% if place.has_photo %}
+  </font>
   <img src= {{ place.photo_url }} height={{ place.photo_height }} width={{ place.photo_width }}>
   {% endif %}
 {% endmacro %}
