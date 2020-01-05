@@ -79,7 +79,7 @@ class BasePlace:
 
   @property
   def has_photo(self) -> bool:
-    return hasattr(self, "photo_url")
+    return self.photo_url is not None
 
 
 class BaseSight(BasePlace):

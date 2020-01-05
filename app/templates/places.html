@@ -50,66 +50,54 @@
 	</head>
 	<body style="background-color:#fff5e6;">
 
-<section id="home" style="height: 100px;">
-<div class="overlay"></div>
-</section>
+  <section id="home" style="height: 100px;">
+  <div class="overlay"></div>
+  </section>
 
-<center>
-<a href={{ url_for("places") }}><i class="icon-arrow-left2" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
-&emsp; &emsp; &emsp;
-<a href={{ url_for("main") }}><i class="icon-home" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
-</center>
+  <center>
+  <a href={{ url_for("places") }}><i class="icon-arrow-left2" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
+  &emsp; &emsp; &emsp;
+  <a href={{ url_for("main") }}><i class="icon-home" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
+  </center>
 
-<div class="colorlib-work">
-	<div class="container" style="margin-right:10%;margin-left:10%;">
-    {% for place in places %}
-    <div class="col-md-12">
-      <div class="work-flex">
-        <div class="animate-box" style="height: {{ place.horizontal_margin }};">
-          <div class="row no-gutters" style="width:1500px;">
-            <div class="col-md-12 no-gutters">
-                  <article style="background-color:rgba(0,0,0,0);">
-                    <table>
-                    <tr>
-                      {% if loop.index % 2 == 1 %}
-                        <td style="padding: 0 50px 0 0;">
-                          <h2><font color=DarkRed>{{ place.name }}</font></h2>
-                          <h4>
-                            {% if place.road_distance is not none %}
-                            <font color=DarkRed>Distance: {{ place.road_distance }} km ({{ place.road_time | int }} min.)</font>
-                            <a href= {{ place.directions_url }}><img src="https://webstockreview.net/images/map-clipart-google-map-14.png" width="100"></a>
-                            {% endif %}
-                          </h4>
-                          <p><font color=DarkRed>{{ place.description }}</font></p>
-                        </td>
-                        {% if place.has_photo %}
-                        <td><img src= {{ place.photo_url }} height={{ place.photo_height }} width={{ place.photo_width }}></td>
-                        {% endif %}
-                      {% else %}
-                        {% if place.has_photo %}
-                        <td style="padding: 0 50px 0 0;"><img src= {{ place.photo_url }} height={{ place.photo_height }} width={{ place.photo_width }}></td>
-                        {% endif %}
-                        <td>
-                          <h2><font color=DarkRed>{{ place.name }}</font></h2>
-                          <h4>
-                            {% if place.road_distance is not none %}
-                            <font color=DarkRed>Distance: {{ place.road_distance }} km ({{ place.road_time | int }} min.)</font>
-                            <a href= {{ place.directions_url }}><img src="https://webstockreview.net/images/map-clipart-google-map-14.png" width="100"></a>
-                            {% endif %}
-                          </h4>
-                          <p><font color=DarkRed>{{ place.description }}</font></p>
-                        </td>
-                      {% endif %}
-                    </tr>
-                    </table>
-                  </article>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
+{% macro print_text(place) %}
+  <h2><font color=DarkRed>{{ place.name }}</font></h2>
+  {% if place.road_distance is not none %}
+  <font color=DarkRed size=4><b>Distance: {{ place.road_distance }} km ({{ place.road_time | int }} min.)</b></font>
+  <a href= {{ place.directions_url }}><img src="https://webstockreview.net/images/map-clipart-google-map-14.png" width="100"></a>
+  {% endif %}
+  <p><font color=DarkRed>{{ place.description }}</font></p>
+{% endmacro %}
+
+{% macro print_image(place) %}
+  {% if place.has_photo %}
+  <img src= {{ place.photo_url }} height={{ place.photo_height }} width={{ place.photo_width }}>
+  {% endif %}
+{% endmacro %}
+
+
+<div class="colorlib-blog">
+			<div class="container">
+          {% for place in places %}
+					<div class="col-lg-12 animate-box">
+						<article style="background-color:rgba(0,0,0,0);">
+              <font color=DarkRed size=3>
+              <table>
+              <tr>
+              {% if loop.index % 2 == 0 and place.has_photo %}
+                <td style="padding: 0px 50px 0 0;">{{ print_image(place)}}</td>
+                <td>{{ print_text(place)}}</td>
+              {% else %}
+                <td style="padding: 0px 50px 0 0;">{{ print_text(place)}}</td>
+                <td>{{ print_image(place)}}</td>
+              {% endif %}
+              </tr>
+              </table>
+						</font>
+          </article>
+					</div>
+          {% endfor %}
+			</div>
 
 			<div class="copy">
 				<div class="container">
