@@ -81,7 +81,7 @@
                     {% if service.telephone is not none %} Tel: {{ service.telephone }} <br> {% endif %}
                     {% if service.fax is not none %} Fax: {{ service.fax }} <br> {% endif %}
                     {% if service.email is not none %} Email: {{ service.email }} <br> {% endif %}
-                    {% if service.website is not none %} Website: {{ service.website }} <br> {% endif %}
+                    {% if service.website is not none %} Website: {{ service.website | safe }} <br> {% endif %}
                   </td>
                 {% if loop.index % 2 == 0 %}</tr>{% endif %}
               {% endfor %}
