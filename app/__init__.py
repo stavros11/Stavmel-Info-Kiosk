@@ -31,7 +31,7 @@ def main():
           models.Category("Emergency", "emergency", "hospital.png"),
           models.Category("Useful phones", "phones", "phone.png")]
   return flask.render_template("home.html", categories=cats,
-                               show_home_button=False)
+                               show_home_button=False, page_title="Home")
 
 
 @app.route("/transportation")
@@ -53,18 +53,24 @@ def places():
           models.PlaceCategory("Monuments", "Monument", "monuments.jpg"),
           models.PlaceCategory("Museums", "Museum", "museum.jpg"),
           models.PlaceCategory("Areas of Natural Beauty", "Natural", "natural.jpg"),
+          models.PlaceCategory("Οpen Αir Μarkets", "Market", "market.jpeg"),
+          models.PlaceCategory("Walking Routes", "Walking", "walking.jpg"),
           models.CategoryURL("Water Park", water_park_url, "waterpark.png", new_tab=True),
           models.PlaceCategory("Tourist Information Offices", "Info", "info.png")]
   return flask.render_template("home.html", categories=cats,
-                               show_home_button=True)
+                               show_home_button=True, page_title="Places")
 
 
 @app.route("/places/<place_type>")
 def places_list(place_type: str):
+  if place_type == "Market":
+    return flask.render_template("market.html", places=models.Market.query.all())
+
   model = getattr(models, place_type)
   data = (model.query.filter(model.road_distance != None).
           order_by(model.road_distance))
-  return flask.render_template("places.html", places=data)
+  return flask.render_template("places.html", places=data,
+                               page_title=place_type.capitalize())
 
 
 @app.route("/emergency")

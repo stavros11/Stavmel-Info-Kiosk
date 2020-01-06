@@ -37,7 +37,9 @@ filenames = {"beaches": "beach",
              "natural": "natural",
              "museums": "museum",
              "hospitals": "hospital",
-             "info_points": "info"}
+             "info_points": "info",
+             "open_markets": "market",
+             "walking_routes": "walking"}
 
 
 # Remove `data.db` file if it exists

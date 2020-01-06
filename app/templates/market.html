@@ -1,20 +1,27 @@
 {% extends "base.html" %}
 
-{% block title %} {{ page_title }} {% endblock %}
+{% block title %} Open Markets {% endblock %}
 
 {% import "macros.html" as macros %}
 
 
 {% block body %}
-<section id="home" style="height: 100px;">
-<div class="overlay"></div>
-</section>
-
+<p></p>
 <center>
 <a href={{ url_for("places") }}><i class="icon-arrow-left2" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
 &emsp; &emsp; &emsp;
 <a href={{ url_for("main") }}><i class="icon-home" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
 </center>
+
+<p></p>
+<section id="home" style="height: 10px;">
+<center>
+<font color=DarkRed size=5>
+  Οpen Αir Μarkets in the city of Rhodes are operating four times a week.<br>
+  For further information the contact number is +30 22410 35950.
+</font>
+</center>
+</section>
 
 <div class="colorlib-blog">
 	<div class="container">
@@ -22,17 +29,8 @@
 		<div class="col-lg-12 animate-box">
 			<article style="background-color:rgba(0,0,0,0);">
         <font color=DarkRed size=3>
-          <table>
-            <tr>
-            {% if loop.index % 2 == 0 and place.has_photo %}
-              <td style="padding: 0px 50px 0 0;">{{ macros.print_information(place)}}{{ macros.print_image(place)}}</td>
-              <td>{{ macros.print_name(place)}}</td>
-            {% else %}
-              <td style="padding: 0px 50px 0 0;">{{ macros.print_name(place)}}</td>
-              <td>{{ macros.print_information(place)}}{{ macros.print_image(place)}}</td>
-            {% endif %}
-            </tr>
-          </table>
+          {{ macros.print_name(place)}}
+          {% if place.opening_hours %}<p><b>Open on:</b> {{ place.opening_hours }}</p>{% endif %}
 				</font>
       </article>
 		</div>
