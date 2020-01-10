@@ -2,8 +2,27 @@
 
 {% block title %} Taxi {% endblock %}
 
-{% import "macros.html" as macros %}
-
+{% macro print_side(places, side) %}
+		<div class="col-lg-6 animate-box">
+		  <article style="background-color:rgba(0,0,0,0);">
+        <center>
+        <font color=DarkRed size=6>{{ side.title() }} Side</font>
+        <font color=DarkRed size=3>
+          <table>
+            {% for place in places %}
+            {% if place.side == "EAST" %}
+              <tr>
+                <td style="padding: 0px 50px 0 0;">{{ place.destination }}</td>
+                <td>{{ place.price }}</td>
+              </tr>
+            {% endif %}
+            {% endfor %}
+          </table>
+				</font>
+        </center>
+      </article>
+		</div>
+{% endmacro %}
 
 {% block body %}
 <p></p>
@@ -33,46 +52,8 @@
       </article>
     </div>
 
-
-		<div class="col-lg-6 animate-box">
-		  <article style="background-color:rgba(0,0,0,0);">
-        <center>
-        <font color=DarkRed size=6>East Side</font>
-        <font color=DarkRed size=3>
-          <table>
-            {% for place in places %}
-            {% if place.side == "EAST" %}
-              <tr>
-                <td style="padding: 0px 50px 0 0;">{{ place.destination }}</td>
-                <td>{{ place.price }}</td>
-              </tr>
-            {% endif %}
-            {% endfor %}
-          </table>
-				</font>
-        </center>
-      </article>
-		</div>
-
-    <div class="col-lg-6 animate-box">
-      <article style="background-color:rgba(0,0,0,0);">
-        <center>
-        <font color=DarkRed size=6>West Side</font>
-        <font color=DarkRed size=3>
-          <table>
-            {% for place in places %}
-            {% if place.side == "WEST" %}
-              <tr>
-                <td style="padding: 0px 50px 0 0;">{{ place.destination }}</td>
-                <td>{{ place.price }}</td>
-              </tr>
-            {% endif %}
-            {% endfor %}
-          </table>
-        </font>
-        </center>
-      </article>
-    </div>
+    {{ print_side(places, "EAST") }}
+    {{ print_side(places, "WEST") }}
 
 	</div>
 </div>
