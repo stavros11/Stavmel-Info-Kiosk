@@ -42,27 +42,33 @@ filenames = {"beaches": "beach",
              "walking_routes": "walking"}
 
 
-# Remove `data.db` file if it exists
-file_path = os.path.join(data_dir, "data.db")
-if os.path.exists(file_path):
-  os.remove(file_path)
+if __name__ == "__main__":
+  # Remove `data.db` file if it exists
+  file_path = os.path.join(data_dir, "data.db")
+  if os.path.exists(file_path):
+    os.remove(file_path)
 
-# Define database file
-db_uri = "sqlite:///{}".format(file_path)
-engine = sqlalchemy.create_engine(db_uri, echo=False)
+  # Define database file
+  db_uri = "sqlite:///{}".format(file_path)
+  engine = sqlalchemy.create_engine(db_uri, echo=False)
 
-# Add places to database
-for filename, tablename in filenames.items():
-  data = pd.read_csv(os.path.join(data_dir, "{}.csv".format(filename)))
+  # Add places to database
+  for filename, tablename in filenames.items():
+    data = pd.read_csv(os.path.join(data_dir, "{}.csv".format(filename)))
+    data["website"] = data["website"].map(transform_website)
+
+    if list(data.columns) != required_columns:
+      raise KeyError("{} has incorrect columns.".format(filename))
+
+    sql_database = data.to_sql(tablename, con=engine)
+
+
+  # Add useful phones to database
+  data = pd.read_csv(os.path.join(data_dir, "useful_phones.csv"))
   data["website"] = data["website"].map(transform_website)
-
-  if list(data.columns) != required_columns:
-    raise KeyError("{} has incorrect columns.".format(filename))
-
-  sql_database = data.to_sql(tablename, con=engine)
+  data.to_sql("phone", con=engine)
 
 
-# Add useful phones to database
-data = pd.read_csv(os.path.join(data_dir, "useful_phones.csv"))
-data["website"] = data["website"].map(transform_website)
-data.to_sql("phone", con=engine)
+  # Add taxi prices to database
+  data = pd.read_csv(os.path.join(data_dir, "taxi_prices.csv"))
+  data.to_sql("taxi", con=engine)

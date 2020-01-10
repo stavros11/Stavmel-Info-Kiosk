@@ -127,3 +127,9 @@ class Phone(db.Model):
   contact = db.Column(db.String(128))
   hours = db.Column(db.String(128))
   type = db.Column(db.String(128))
+
+
+class Taxi(db.Model):
+  destination = db.Column(db.String(128), primary_key=True)
+  price = db.Column(db.String(64))
+  side = db.Column(db.String(64))

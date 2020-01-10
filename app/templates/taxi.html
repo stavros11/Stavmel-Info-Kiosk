@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %} Taxi {% endblock %}
+
+{% import "macros.html" as macros %}
+
+
+{% block body %}
+<p></p>
+<center>
+<a href={{ url_for("main") }}><i class="icon-home" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
+</center>
+
+<div class="colorlib-blog">
+  <div class="container">
+    <div class="col-lg-12 animate-box">
+      <article style="background-color:rgba(0,0,0,0);">
+        <center>
+        <font color=DarkRed size=5>
+        <p><b>Rodos Radio Taxi</b>
+          <br><font size=4><a href="https://www.rhodes-taxi.gr/" target="blank">https://www.rhodes-taxi.gr</a></font>
+          <br><font size=4>In Rhodes town: 22410 69800</font>
+          <br><font size=4>Out of Rhodes town: 22410 69800</font>
+        </p>
+        <p><b>Diagoras Radio Taxi</b>
+          <br><font size=4><a href="http://diagorastaxi.gr/" target="blank">http://www.diagorastaxi.gr</a></font>
+          <br><font size=4>22410 65555</font></p>
+
+        <p></p>
+        <p><b>Minimum Charge:</b> 3.72 euro</p>
+        </font>
+        </center>
+      </article>
+    </div>
+
+
+		<div class="col-lg-6 animate-box">
+		  <article style="background-color:rgba(0,0,0,0);">
+        <center>
+        <font color=DarkRed size=6>East Side</font>
+        <font color=DarkRed size=3>
+          <table>
+            {% for place in places %}
+            {% if place.side == "EAST" %}
+              <tr>
+                <td style="padding: 0px 50px 0 0;">{{ place.destination }}</td>
+                <td>{{ place.price }}</td>
+              </tr>
+            {% endif %}
+            {% endfor %}
+          </table>
+				</font>
+        </center>
+      </article>
+		</div>
+
+    <div class="col-lg-6 animate-box">
+      <article style="background-color:rgba(0,0,0,0);">
+        <center>
+        <font color=DarkRed size=6>West Side</font>
+        <font color=DarkRed size=3>
+          <table>
+            {% for place in places %}
+            {% if place.side == "WEST" %}
+              <tr>
+                <td style="padding: 0px 50px 0 0;">{{ place.destination }}</td>
+                <td>{{ place.price }}</td>
+              </tr>
+            {% endif %}
+            {% endfor %}
+          </table>
+        </font>
+        </center>
+      </article>
+    </div>
+
+	</div>
+</div>
+{% endblock %}
