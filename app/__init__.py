@@ -36,21 +36,17 @@ def main():
 
 @app.route("/transportation")
 def transportation():
-  cats = [models.Category("Bus", "main", "bus.jpg"),
-          models.Category("Taxi", "taxi", "taxi.jpg")]
-  return flask.render_template("home.html", categories=cats,
-                               show_home_button=True,
-                               page_title="Transportation")
-
-
-@app.route("/transportation/bus")
-def bus():
-  return flask.render_template("bus.html")
+  return flask.render_template("transportation.html")
 
 
 @app.route("/transportation/taxi")
 def taxi():
   return flask.render_template("taxi.html", places=models.Taxi.query.all())
+
+
+@app.route("/transportation/bus/ktel")
+def ktel():
+  return flask.redirect(flask.url_for("transportation"))
 
 
 @app.route("/maps")
