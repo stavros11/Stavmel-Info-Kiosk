@@ -68,6 +68,8 @@ class BasePlace:
   photo_height = 350
   photo_width = 520
 
+  column_width = "70%"
+
   @property
   def id(self) -> str:
     return "".join(word.lower() for word in self.name.split(" "))
@@ -91,10 +93,13 @@ class BasePlace:
 
 
 class Beach(db.Model, BasePlace): pass
-class Museum(db.Model, BasePlace): pass
 class Hospital(db.Model, BasePlace): pass
 class Info(db.Model, BasePlace): pass
 class Market(db.Model, BasePlace): pass
+
+
+class Museum(db.Model, BasePlace):
+  column_width = "60%"
 
 
 class Walking(db.Model, BasePlace):
