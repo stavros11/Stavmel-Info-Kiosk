@@ -10,7 +10,7 @@
         <font color=DarkRed size=3>
           <table>
             {% for place in places %}
-            {% if place.side == "EAST" %}
+            {% if place.side == side %}
               <tr>
                 <td style="padding: 0px 50px 0 0;">{{ place.destination }}</td>
                 <td>{{ place.price }}</td>
@@ -27,6 +27,8 @@
 {% block body %}
 <p></p>
 <center>
+<a href={{ url_for("transportation") }}><i class="icon-arrow-left2" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
+&emsp; &emsp; &emsp;
 <a href={{ url_for("main") }}><i class="icon-home" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
 </center>
 

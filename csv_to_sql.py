@@ -29,7 +29,7 @@ def transform_ktel_times(times_str: str) -> str:
     elif len(elements) == 2:
       elements.append("")
     transformed_times.append("{}.{}{}".format(*elements))
-  return ",".join(transformed_times)
+  return ", ".join(transformed_times)
 
 
 required_columns = ['name',

@@ -46,7 +46,7 @@ def taxi():
 
 @app.route("/transportation/bus/ktel")
 def ktel():
-  return flask.redirect(flask.url_for("transportation"))
+  return flask.render_template("ktel.html", routes=models.Ktel.query.all())
 
 
 @app.route("/maps")

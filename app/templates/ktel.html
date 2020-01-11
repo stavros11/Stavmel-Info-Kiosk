@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %} KTEL {% endblock %}
+
+
+{% block body %}
+<p></p>
+<center>
+<a href={{ url_for("transportation") }}><i class="icon-arrow-left2" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
+&emsp; &emsp; &emsp;
+<a href={{ url_for("main") }}><i class="icon-home" style="padding-top:100px; font-size:4em; color:DarkRed;"></i></a>
+</center>
+
+<div class="colorlib-blog">
+  <div class="container">
+    <div class="col-lg-12 animate-box">
+      <article style="background-color:rgba(0,0,0,0);">
+        <center>
+        <font color=DarkRed size=6><b>KTEL Rhodes</b></font>
+        <font color=DarkRed size=4>
+        <p>Long distance transportation of the east side area <br>
+          Tel: +30 22410 27706 / +30 22410 75134 <br>
+          <a href="https://www.ktelrodou.gr/en/" target="blank">www.ktelrodou.gr</a>
+        </p>
+        <p> Prices and Timetables for major destinations below. <br>
+          Prices are <b>one way</b>.<br>
+          Routes marked with * do not operate on Saturday.
+        </font>
+        </center>
+      </article>
+    </div>
+
+    {% for route in routes %}
+		<div class="col-lg-12 animate-box">
+		  <article style="background-color:rgba(0,0,0,0);">
+        <font color=DarkRed size=5>
+          <p><b>{{ route.destination }}</b>
+          <br>Price: <b>{{ route.price }}</b></p>
+        </font>
+        <font color=DarkRed size=4><p>
+          {% if route.from_rhodes %}From Rhodes: {{ route.from_rhodes }}{% endif %}
+          <br>{% if route.to_rhodes %}To Rhodes: {{ route.to_rhodes }}{% endif %}
+          <br>{% if route.from_rhodes_sunday %}From Rhodes (Sunday and holidays): {{ route.from_rhodes_sunday }}{% endif %}
+          <br>{% if route.to_rhodes_sunday %}To Rhodes (Sunday and holidays): {{ route.to_rhodes_sunday }}{% endif %}
+				</p></font>
+      </article>
+		</div>
+    {% endfor %}
+	</div>
+</div>
+{% endblock %}
