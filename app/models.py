@@ -1,4 +1,5 @@
 import os
+import itertools
 import flask
 import numpy as np
 from app import db
@@ -142,3 +143,13 @@ class Ktel(db.Model):
   to_rhodes = db.Column(db.String(4096))
   from_rhodes_sunday = db.Column(db.String(4096))
   to_rhodes_sunday = db.Column(db.String(4096))
+
+  @property
+  def timetable(self):
+    time_str_all = (self.from_rhodes, self.to_rhodes, self.from_rhodes_sunday,
+                    self.to_rhodes_sunday)
+    time_list_all = [x.split(", ") if isinstance(x, str) else []
+                     for x in time_str_all]
+    for times in itertools.zip_longest(*time_list_all):
+      print(list(t if isinstance(t, str) else "" for t in times))
+      yield list(t if isinstance(t, str) else "" for t in times)

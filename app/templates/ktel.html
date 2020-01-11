@@ -37,12 +37,24 @@
           <p><b>{{ route.destination }}</b>
           <br>Price: <b>{{ route.price }}</b></p>
         </font>
-        <font color=DarkRed size=4><p>
-          {% if route.from_rhodes %}From Rhodes: {{ route.from_rhodes }}{% endif %}
-          <br>{% if route.to_rhodes %}To Rhodes: {{ route.to_rhodes }}{% endif %}
-          <br>{% if route.from_rhodes_sunday %}From Rhodes (Sunday and holidays): {{ route.from_rhodes_sunday }}{% endif %}
-          <br>{% if route.to_rhodes_sunday %}To Rhodes (Sunday and holidays): {{ route.to_rhodes_sunday }}{% endif %}
-				</p></font>
+        <font color=DarkRed size=4>
+          <table>
+            <tr>
+              <td style="padding: 0px 100px 0 0;"><center> From Rhodes </center></td>
+              <td style="padding: 0px 100px 0 0;"><center> To Rhodes </center></td>
+              <td style="padding: 0px 100px 0 0;"><center> From Rhodes <br> (Sunday and holidays) </center></td>
+              <td><center> To Rhodes <br> (Sunday and holidays) </center></td>
+            </tr>
+            {% for time in route.timetable %}
+            <tr>
+              <td style="padding: 0px 100px 0 0;"><center> {{ time[0] }} </center></td>
+              <td style="padding: 0px 100px 0 0;"><center> {{ time[1] }} </center></td>
+              <td style="padding: 0px 100px 0 0;"><center> {{ time[2] }} </center></td>
+              <td><center> {{ time[3] }} </center></td>
+            </tr>
+            {% endfor %}
+          </table>
+        </font>
       </article>
 		</div>
     {% endfor %}
