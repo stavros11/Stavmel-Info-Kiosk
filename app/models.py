@@ -156,5 +156,4 @@ class Ktel(db.Model):
     time_list_all = [x.split(", ") if isinstance(x, str) else []
                      for x in time_str_all]
     for times in itertools.zip_longest(*time_list_all):
-      print(list(t if isinstance(t, str) else "" for t in times))
       yield list(t if isinstance(t, str) else "" for t in times)
