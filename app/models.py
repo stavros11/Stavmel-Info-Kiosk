@@ -3,6 +3,7 @@ import itertools
 import flask
 import numpy as np
 from app import db
+from typing import List
 
 
 class Category:
@@ -145,7 +146,11 @@ class Ktel(db.Model):
   to_rhodes_sunday = db.Column(db.String(4096))
 
   @property
-  def timetable(self):
+  def has_sunday(self) -> bool:
+    return isinstance(self.from_rhodes_sunday, str)
+
+  @property
+  def timetable(self) -> List[str]:
     time_str_all = (self.from_rhodes, self.to_rhodes, self.from_rhodes_sunday,
                     self.to_rhodes_sunday)
     time_list_all = [x.split(", ") if isinstance(x, str) else []

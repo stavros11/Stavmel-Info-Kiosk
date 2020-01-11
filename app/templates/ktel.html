@@ -49,8 +49,13 @@
             <tr>
               <td style="padding: 0px 100px 0 0;"><center> {{ time[0] }} </center></td>
               <td style="padding: 0px 100px 0 0;"><center> {{ time[1] }} </center></td>
+              {% if not route.has_sunday and loop.index == 1 %}
+              <td style="padding: 0px 100px 0 0;"><center> N/A </center></td>
+              <td><center> N/A </center></td>
+              {% else %}
               <td style="padding: 0px 100px 0 0;"><center> {{ time[2] }} </center></td>
               <td><center> {{ time[3] }} </center></td>
+              {% endif %}
             </tr>
             {% endfor %}
           </table>
