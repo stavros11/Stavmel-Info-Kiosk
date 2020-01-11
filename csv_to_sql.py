@@ -2,7 +2,8 @@ import os
 import sqlalchemy
 import pandas as pd
 
-data_dir = "/home/stavros/DATA/InfoKiosk"
+data_dir = os.path.join(os.getenv("USERPROFILE"), "Documents",
+                        "info-kiosk-data")
 
 
 def transform_website(url: str) -> str:

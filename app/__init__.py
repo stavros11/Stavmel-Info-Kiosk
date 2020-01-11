@@ -1,3 +1,4 @@
+import os
 import flask
 import flask_sqlalchemy
 import flask_migrate
@@ -6,7 +7,8 @@ import flask_migrate
 # Define app
 app = flask.Flask(__name__)
 # Storage directory
-app.config["STORAGE_PATH"] = "/home/stavros/DATA/InfoKiosk"
+app.config["STORAGE_PATH"] = os.path.join(os.getenv("USERPROFILE"),
+                                          "Documents", "info-kiosk-data")
 # Configure SQL SQLAlchemy
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///{}/data.db".format(
     app.config["STORAGE_PATH"])
