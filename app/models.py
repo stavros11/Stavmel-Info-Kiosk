@@ -133,3 +133,12 @@ class Taxi(db.Model):
   destination = db.Column(db.String(128), primary_key=True)
   price = db.Column(db.String(64))
   side = db.Column(db.String(64))
+
+
+class Ktel(db.Model):
+  destination = db.Column(db.String(128), primary_key=True)
+  price = db.Column(db.String(64))
+  from_rhodes = db.Column(db.String(4096))
+  to_rhodes = db.Column(db.String(4096))
+  from_rhodes_sunday = db.Column(db.String(4096))
+  to_rhodes_sunday = db.Column(db.String(4096))
