@@ -1,4 +1,5 @@
 import os
+import json
 import flask
 import flask_sqlalchemy
 import flask_migrate
@@ -9,6 +10,12 @@ app = flask.Flask(__name__)
 # Storage directory
 app.config["STORAGE_PATH"] = os.path.join(os.getenv("USERPROFILE"),
                                           "Documents", "info-kiosk-data")
+#app.config["STORAGE_PATH"] = "/home/stavros/DATA/InfoKiosk"
+# Load predefined urls
+with open(os.path.join(app.config["STORAGE_PATH"], "urls.txt")) as file:
+  urls_dict = json.load(file)
+for url_key, url in urls_dict.items():
+  app.config["_".join([url_key, "URL"])] = url
 # Configure SQL SQLAlchemy
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///{}/data.db".format(
     app.config["STORAGE_PATH"])
@@ -19,17 +26,16 @@ db = flask_sqlalchemy.SQLAlchemy(app)
 migrate = flask_migrate.Migrate(app, db)
 
 
-import os
 from app import models
 
 
 @app.route('/')
 def main():
-  weather_url = "https://weather.com/weather/today/l/f0de8849c0ac9f287c8d68536eb02828142419816360f365c396c7c9782f6819"
   cats = [models.Category("Transportation", "transportation", "transportation.png"),
           models.Category("Maps", "maps", "map.jpg"),
           models.Category("Places of Interest", "places", "poi.png"),
-          models.CategoryURL("Weather", weather_url, "weather.png", new_tab=True),
+          models.CategoryURL("Weather", app.config["WEATHER_URL"],
+                             "weather.png", new_tab=True),
           models.Category("Emergency", "emergency", "hospital.png"),
           models.Category("Useful phones", "phones", "phone.png")]
   return flask.render_template("home.html", categories=cats,
@@ -60,15 +66,17 @@ def maps():
 
 @app.route("/places")
 def places():
-  water_park_url = "https://www.water-park.gr/"
   cats = [models.PlaceCategory("Beaches", "Beach", "beaches.jpg"),
           models.PlaceCategory("Monuments", "Monument", "monuments.jpg"),
           models.PlaceCategory("Museums", "Museum", "museum.jpg"),
           models.PlaceCategory("Areas of Natural Beauty", "Natural", "natural.jpg"),
           models.PlaceCategory("Οpen Αir Μarkets", "Market", "market.jpeg"),
           models.PlaceCategory("Walking Routes", "Walking", "walking.jpg"),
-          models.CategoryURL("Water Park", water_park_url, "waterpark.png", new_tab=True),
-          models.PlaceCategory("Tourist Information Offices", "Info", "info.png")]
+          models.PlaceCategory("Tourist Information Offices", "Info", "info.png"),
+          models.CategoryURL("Water Park", app.config["WATER_PARK_URL"],
+                             "waterpark.png", new_tab=True),
+          models.CategoryURL("Throne of Helios", app.config["THRONE_OF_HELIOS_URL"],
+                             "throne.jpg", new_tab=True)]
   return flask.render_template("home.html", categories=cats,
                                show_home_button=True, page_title="Places")
 
